@@ -9,7 +9,10 @@ const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 const io = new Server(PORT, {
   cors: {
     origin: CLIENT_URL,
+    methods: ["GET", "POST"],
+    credentials: true,
   },
+  transports: ["websocket", "polling"], // fuerza ambos transportes
 });
 
 const characters = [];
