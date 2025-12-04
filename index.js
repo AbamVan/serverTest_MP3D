@@ -1,12 +1,16 @@
 import { Server } from "socket.io";
 
-const io = new Server(5173, {
+// Railway asigna el puerto en la variable de entorno PORT
+const PORT = process.env.PORT || 3003;
+
+// Define el origen permitido desde variable de entorno
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
+
+const io = new Server(PORT, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: CLIENT_URL,
   },
 });
-
-io.listen(3003);
 
 const characters = [];
 
