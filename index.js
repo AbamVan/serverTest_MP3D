@@ -35,8 +35,7 @@ io.on("connection", (socket) => {
   });
 
   socket.emit("hello");
-
-  socket.emit("characters", characters);
+  io.emit("characters", characters);
 
   // socket.on("move", (position) => {
   //     const character = characters.find((character) => character.id === socket.id);
