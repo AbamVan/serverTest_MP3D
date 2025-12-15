@@ -44,11 +44,11 @@ io.on("connection", (socket) => {
     if (character) {
       character.position = position;
 
-      // io.emit("updateCharacter", {
-      //   id: socket.id,
-      //   position: character.position,
-      //   // randomColor: character.randomColor,
-      // });
+      io.emit("updateCharacter", {
+        id: socket.id,
+        position: character.position,
+        // randomColor: character.randomColor,
+      });
     }
   });
 
