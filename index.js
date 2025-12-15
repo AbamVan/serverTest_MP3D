@@ -33,15 +33,11 @@ io.on("connection", (socket) => {
     position: generateRandomPosition(),
     randomColor: generateRandomColor(),
   });
-
+  // Bienvenida al usuario que se conecta
   socket.emit("hello");
-  io.emit("characters", characters);
 
-  // socket.on("move", (position) => {
-  //     const character = characters.find((character) => character.id === socket.id);
-  //     character.position = position;
-  //     io.emit("characters", characters);
-  // });
+  // Se envian los datos del juagdor a todos los jugadores (importante por la posicion)
+  io.emit("characters", characters);
 
   socket.on("move", (position) => {
     const character = characters.find((c) => c.id === socket.id);
@@ -58,10 +54,13 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("user disconnected:", socket.id);
+    io.emit("disconnect")
     characters.splice(
       characters.findIndex((character) => character.id === socket.id),
       1
     );
     io.emit("characters", characters);
   });
+
+
 });
