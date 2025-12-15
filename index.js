@@ -39,6 +39,7 @@ io.on("connection", (socket) => {
   // Se envian los datos del juagdor a todos los jugadores (importante por la posicion)
   io.emit("characters", characters);
 
+
   socket.on("move", (position) => {
     const character = characters.find((c) => c.id === socket.id);
     if (character) {
@@ -54,7 +55,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("user disconnected:", socket.id);
-    // io.emit("disconnect")
+    // io.emit("disconnect") //checar porque recarga el sitio
     characters.splice(
       characters.findIndex((character) => character.id === socket.id),
       1
