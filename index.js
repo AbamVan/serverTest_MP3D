@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("user disconnected:", socket.id);
-    io.emit("disconnect")
+    // io.emit("disconnect")
     characters.splice(
       characters.findIndex((character) => character.id === socket.id),
       1
