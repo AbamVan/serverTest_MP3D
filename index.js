@@ -32,14 +32,20 @@ io.on("connection", (socket) => {
     id: socket.id,
     position: generateRandomPosition(),
     randomColor: generateRandomColor(),
+    username: null,
   });
   // Bienvenida al usuario que se conecta
   socket.emit("hello");
 
   // Se envian los datos del juagdor a todos los jugadores (importante por la posicion)
-  socket.on("startPlayer", ()=>{
+  socket.on("startPlayer", (username)=>{
+    const character = characters.find((c) => c.id === socket.id);
+    if(character){
+      character.username = username;
+    }
+
     io.emit("characters", characters);
-    console.log("actualizar posicion de todos jugadores")
+    console.log("actualizar posicion y nombre de todos jugadores")
   });
   
 
@@ -56,8 +62,6 @@ io.on("connection", (socket) => {
     }
   });
 
-
-  
 
 
   socket.on("disconnect", () => {
