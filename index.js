@@ -37,8 +37,11 @@ io.on("connection", (socket) => {
   socket.emit("hello");
 
   // Se envian los datos del juagdor a todos los jugadores (importante por la posicion)
-  io.emit("characters", characters);
-
+  socket.on("startPlayer", ()=>{
+    io.emit("characters", characters);
+    console.log("actualizar posicion de todos jugadores")
+  });
+  
 
   socket.on("move", (position) => {
     const character = characters.find((c) => c.id === socket.id);
@@ -52,6 +55,10 @@ io.on("connection", (socket) => {
       });
     }
   });
+
+
+  
+
 
   socket.on("disconnect", () => {
     console.log("user disconnected:", socket.id);
